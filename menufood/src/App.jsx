@@ -1,11 +1,15 @@
-import { Button } from "@/components/ui/button"
+import { Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import CategoryPage from "./pages/CategoryPage";
+import FoodPage from "./pages/FoodPage";
 
-function App() {
+
+export default function App() {
   return (
-    <div className="text-red-600">
-     loij
-    </div>
-  )
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/category/:categoryName" element={<CategoryPage />} />
+      <Route path="/category/:categoryName/:foodId" element={<FoodPage />} />
+    </Routes>
+  );
 }
-
-export default App
