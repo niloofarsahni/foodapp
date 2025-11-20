@@ -118,3 +118,12 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Background image class for the app. Place `bg-food.jpg` in the `public/` folder. */
+.bg-food {
+  background-image: url('/bg-food.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
