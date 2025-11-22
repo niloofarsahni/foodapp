@@ -9,7 +9,7 @@ export const foodData = [
   },
   {
     id: 2,
-    name: "Salad",
+    name: "سالاد",
     category: "appetizer",
     description: "Fresh mixed salad",
     price: 180000,
