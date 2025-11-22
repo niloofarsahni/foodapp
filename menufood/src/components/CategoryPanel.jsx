@@ -1,4 +1,5 @@
 import CategoryCard from "./CategoryCard";
+import { MoveLeft, Plus, ShoppingCart } from "lucide-react";
 
 export default function CategoryPanel({ open, setOpen }) {
     return (
@@ -24,9 +25,9 @@ export default function CategoryPanel({ open, setOpen }) {
                     {/* Back Button */}
                     <button
                         onClick={() => setOpen(false)}
-                        className="text-gray-600 text-lg border px-3 py-1 rounded-xl hover:bg-gray-100"
+                        className="text-gray-600 text-lg border px-6 py-2 rounded-lg hover:bg-gray-100"
                     >
-                        بازگشت
+                        <MoveLeft /> 
                     </button>
                 </div>
             )}
