@@ -10,7 +10,9 @@ export function BasketProvider({ children }) {
             const existing = prev.find(item => item.id === food.id);
             if (existing) {
                 return prev.map(item =>
-                    item.id === food.id ? { ...item, quantity: item.quantity + quantity } : item
+                    item.id === food.id
+                        ? { ...item, quantity: item.quantity + quantity }
+                        : item
                 );
             }
             return [...prev, { ...food, quantity }];
@@ -21,8 +23,9 @@ export function BasketProvider({ children }) {
         setBasket(prev =>
             prev.flatMap(item => {
                 if (item.id === id) {
+                    // decrease quantity OR remove item
                     if (item.quantity > 1) return { ...item, quantity: item.quantity - 1 };
-                    return []; // remove item if quantity = 1
+                    return []; 
                 }
                 return item;
             })
@@ -36,19 +39,21 @@ export function BasketProvider({ children }) {
     const clearBasket = () => setBasket([]);
 
     return (
-        <BasketContext.Provider value={{
-            basket,
-            addToBasket,
-            removeOneFromBasket, // <-- Fix: include this
-            removeFromBasket,
-            clearBasket
-        }}>
+        <BasketContext.Provider
+            value={{
+                basket,
+                addToBasket,
+                removeOneFromBasket,
+                removeFromBasket,
+                clearBasket,
+            }}
+        >
             {children}
         </BasketContext.Provider>
     );
 }
 
-// Custom hook for easy access
+// Hook for using basket context
 export function useBasket() {
     return useContext(BasketContext);
 }

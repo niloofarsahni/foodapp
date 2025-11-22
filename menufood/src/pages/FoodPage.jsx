@@ -89,7 +89,7 @@ export default function FoodPage() {
           </div>
 
           {/* Overlapping div */}
-          <div className="absolute  w-full -translate-y-6 bg-white rounded-t-4xl  p-6 z-10">
+          <div className="absolute  w-full -translate-y-7 bg-white rounded-t-4xl  p-6 z-10">
             <h1 className="text-2xl md:text-3xl font-extrabold">{food.name}</h1>
             <p className="text-gray-600 mt-4 leading-relaxed mb-6">
               {food.description}

@@ -28,7 +28,7 @@ export default function CategoryPage() {
 
     return (
         <div className=" p-6">
-            {/* Basket Icon */}
+            {/* { Icon */}
             <div className="flex justify-between">
 
                 <div>
