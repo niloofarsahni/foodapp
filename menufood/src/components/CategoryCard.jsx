@@ -26,7 +26,7 @@ const CategoryItem = memo(({ label, image, link }) => {
 
 function CategoryCard() {
   const categories = [
-    { label: "غذای اصلی", image: "/assets/mainfoodpic.jpg", link: "/category/main" },
+    { label: "غذای اصلی", image: "/assets/kabab.jpg", link: "/category/main" },
     { label: "پیش غذا", image: "/assets/fries.jpg", link: "/category/appetizer" },
     { label: "نوشیدنی", image: "/assets/Doogh.jpg", link: "/category/drinks" },
   ];
