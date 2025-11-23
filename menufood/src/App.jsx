@@ -1,5 +1,5 @@
 import { Routes, Route, Router } from "react-router-dom";
-import HomePage from "./pages/HomePage";
+import HomePage from "./pages/MainPage";
 import CategoryPage from "./pages/CategoryPage";
 import FoodPage from "./pages/FoodPage";
 import { BasketProvider } from "./context/BasketContext";

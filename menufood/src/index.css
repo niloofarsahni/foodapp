@@ -118,6 +118,7 @@
     @apply bg-background text-foreground;
     font-family: 'Inter', 'shabnam', sans-serif;
   }
+  
 }
 
 /* Background image class for the app. Place `bg-food.jpg` in the `public/` folder. */
