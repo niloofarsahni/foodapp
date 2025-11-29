@@ -1,10 +1,10 @@
-// components/CategoryPanel.jsx
+// components/CategoryPanel.jsx  ← FINAL VERSION
 import { useRef, useEffect } from "react";
 import CategoryCard from "./CategoryCard";
-import { MoveLeft } from "lucide-react";
+import { MoveLeft}  from "lucide-react";
 
-const CLOSED_HEIGHT = 15;   // ← You wanted 15vh
-const OPEN_HEIGHT = "100dvh"; // ← Perfect on iPhone Safari
+const CLOSED_HEIGHT = 15;   // 15vh when closed
+const OPEN_HEIGHT = 90;     // 90vh when open ← perfect on iPhone
 
 export default function CategoryPanel({ open, setOpen }) {
   const panelRef = useRef(null);
@@ -16,13 +16,13 @@ export default function CategoryPanel({ open, setOpen }) {
   const currentHeight = isDragging.current
     ? `${startHeight.current}vh`
     : open
-    ? OPEN_HEIGHT
+    ? `${OPEN_HEIGHT}vh`
     : `${CLOSED_HEIGHT}vh`;
 
   const startDrag = (clientY) => {
     isDragging.current = true;
     startY.current = clientY;
-    startHeight.current = open ? 100 : CLOSED_HEIGHT;
+    startHeight.current = open ? OPEN_HEIGHT : CLOSED_HEIGHT;
   };
 
   const moveDrag = (clientY) => {
@@ -30,9 +30,10 @@ export default function CategoryPanel({ open, setOpen }) {
     const delta = clientY - startY.current;
     velocity.current = delta;
 
-    if (!open && delta < 0) { // swipe up when closed
-      const progress = Math.min(Math.abs(delta) / 250, 1);
-      const newHeight = CLOSED_HEIGHT + progress * (100 - CLOSED_HEIGHT);
+    // Super sensitive: opens even with 40px swipe up
+    if (!open && delta < 0) {
+      const progress = Math.min(Math.abs(delta) / 120, 1); // ← very sensitive!
+      const newHeight = CLOSED_HEIGHT + progress * (OPEN_HEIGHT - CLOSED_HEIGHT);
       startHeight.current = newHeight;
       panelRef.current.style.height = `${newHeight}vh`;
     }
@@ -42,19 +43,28 @@ export default function CategoryPanel({ open, setOpen }) {
     if (!isDragging.current) return;
     isDragging.current = false;
 
-    const fast = Math.abs(velocity.current) > 400;
-    const far = Math.abs(velocity.current) > 100;
+    const speed = Math.abs(velocity.current);
+    const distance = Math.abs(velocity.current);
 
-    if (fast || (far && velocity.current < 0)) {
-      setOpen(true);
+    // Opens with very small swipe or any speed
+    if (speed > 200 || distance > 40) {
+      if (velocity.current < 0) {
+        setOpen(true);
+      } else {
+        setOpen(false);
+      }
     } else {
-      setOpen(false);
+      // Snap to nearest
+      setOpen(startHeight.current > 50);
     }
   };
 
-  // Touch & Mouse
+  // Events
   const onTouchStart = (e) => startDrag(e.touches[0].clientY);
-  const onTouchMove = (e) => { e.preventDefault(); moveDrag(e.touches[0].clientY); };
+  const onTouchMove = (e) => {
+    e.preventDefault();
+    moveDrag(e.touches[0].clientY);
+  };
   const onTouchEnd = endDrag;
   const onMouseDown = (e) => startDrag(e.clientY);
   const onMouseMove = (e) => moveDrag(e.clientY);
@@ -88,12 +98,12 @@ export default function CategoryPanel({ open, setOpen }) {
         className="fixed inset-x-0 bottom-0 bg-white rounded-t-3xl shadow-2xl z-50 overflow-hidden touch-none select-none"
         style={{
           height: currentHeight,
-          transition: isDragging.current ? "none" : "height 0.5s cubic-bezier(0.22, 1, 0.36, 1)",
+          transition: isDragging.current ? "none" : "height 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)",
         }}
       >
-        {/* Drag Handle */}
+        {/* Drag Handle – bigger & easier to grab */}
         <div
-          className="absolute top-4 left-1/2 -translate-x-1/2 w-12 h-1.5 bg-gray-400 rounded-full cursor-grab active:cursor-grabbing z-10"
+          className="absolute top-3 left-1/2 -translate-x-1/2 w-14 h-1.5 bg-gray-400 rounded-full cursor-grab active:cursor-grabbing z-20"
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
@@ -104,7 +114,7 @@ export default function CategoryPanel({ open, setOpen }) {
         />
 
         {/* Header */}
-        <div className="pt-16 px-6 flex items-center justify-center relative">
+        <div className="pt-14 px-6 flex items-center justify-center relative">
           <h2 className={`text-2xl font-bold text-gray-900 absolute transition-all duration-300 ${open ? "right-6" : "left-1/2 -translate-x-1/2"}`}>
             منو رستوران
           </h2>
@@ -114,22 +124,19 @@ export default function CategoryPanel({ open, setOpen }) {
               onClick={() => setOpen(false)}
               className="absolute left-6 p-3 rounded-xl hover:bg-gray-100 transition"
             >
-              <MoveLeft className="w-7 h-7" />
+              ←
             </button>
           )}
         </div>
 
-        {/* Content – only when open */}
+        {/* Content */}
         {open && (
           <div className="mt-6 px-6 pb-32 overflow-y-auto h-full">
             <CategoryCard />
           </div>
         )}
 
-        {/* Hint when closed */}
-        {!open && (
-          <p className="text-center text-gray-500 text-sm mt-3">بکشید بالا ↑</p>
-        )}
+    
       </div>
     </>
   );
