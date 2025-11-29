@@ -1,10 +1,10 @@
-// components/CategoryPanel.jsx  ← FINAL VERSION
+// components/CategoryPanel.jsx  ← MAXIMUM SENSITIVITY VERSION
 import { useRef, useEffect } from "react";
 import CategoryCard from "./CategoryCard";
-import { MoveLeft}  from "lucide-react";
+import { MoveLeft } from "lucide-react";
 
-const CLOSED_HEIGHT = 15;   // 15vh when closed
-const OPEN_HEIGHT = 90;     // 90vh when open ← perfect on iPhone
+const CLOSED_HEIGHT = 15;
+const OPEN_HEIGHT = 90;
 
 export default function CategoryPanel({ open, setOpen }) {
   const panelRef = useRef(null);
@@ -30,9 +30,9 @@ export default function CategoryPanel({ open, setOpen }) {
     const delta = clientY - startY.current;
     velocity.current = delta;
 
-    // Super sensitive: opens even with 40px swipe up
     if (!open && delta < 0) {
-      const progress = Math.min(Math.abs(delta) / 120, 1); // ← very sensitive!
+      // SUPER SENSITIVE: only 70px swipe = 100% open
+      const progress = Math.min(Math.abs(delta) / 70, 1); // ← magic number
       const newHeight = CLOSED_HEIGHT + progress * (OPEN_HEIGHT - CLOSED_HEIGHT);
       startHeight.current = newHeight;
       panelRef.current.style.height = `${newHeight}vh`;
@@ -46,20 +46,16 @@ export default function CategoryPanel({ open, setOpen }) {
     const speed = Math.abs(velocity.current);
     const distance = Math.abs(velocity.current);
 
-    // Opens with very small swipe or any speed
-    if (speed > 200 || distance > 40) {
-      if (velocity.current < 0) {
-        setOpen(true);
-      } else {
-        setOpen(false);
-      }
+    // Opens with tiny swipe or any speed
+    if (speed > 100 || distance > 15) { // ← 15px is enough!
+      if (velocity.current < 0) setOpen(true);
+      else setOpen(false);
     } else {
-      // Snap to nearest
-      setOpen(startHeight.current > 50);
+      setOpen(startHeight.current > 40);
     }
   };
 
-  // Events
+  // Touch & Mouse events
   const onTouchStart = (e) => startDrag(e.touches[0].clientY);
   const onTouchMove = (e) => {
     e.preventDefault();
@@ -72,38 +68,34 @@ export default function CategoryPanel({ open, setOpen }) {
 
   useEffect(() => {
     if (isDragging.current) {
-      window.addEventListener("mousemove", onMouseMove);
-      window.addEventListener("mouseup", onMouseUp);
-      window.addEventListener("touchmove", onTouchMove, { passive: false });
-      window.addEventListener("touchend", onTouchEnd);
+      document.addEventListener("mousemove", onMouseMove);
+      document.addEventListener("mouseup", onMouseUp);
+      document.addEventListener("touchmove", onTouchMove, { passive: false });
+      document.addEventListener("touchend", onTouchEnd);
     }
     return () => {
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("mouseup", onMouseUp);
-      window.removeEventListener("touchmove", onTouchMove);
-      window.removeEventListener("touchend", onTouchEnd);
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseup", onMouseUp);
+      document.removeEventListener("touchmove", onTouchMove);
+      document.removeEventListener("touchend", onTouchEnd);
     };
   }, []);
 
   return (
     <>
-      {/* Backdrop */}
-      {open && (
-        <div className="fixed inset-0 bg-black/60 z-40" onClick={() => setOpen(false)} />
-      )}
+      {open && <div className="fixed inset-0 bg-black/60 z-40" onClick={() => setOpen(false)} />}
 
-      {/* Bottom Sheet */}
       <div
         ref={panelRef}
         className="fixed inset-x-0 bottom-0 bg-white rounded-t-3xl shadow-2xl z-50 overflow-hidden touch-none select-none"
         style={{
           height: currentHeight,
-          transition: isDragging.current ? "none" : "height 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)",
+          transition: isDragging.current ? "none" : "height 0.35s cubic-bezier(0.2, 0.9, 0.3, 1)",
         }}
       >
-        {/* Drag Handle – bigger & easier to grab */}
+        {/* Bigger & taller drag handle = easier to touch */}
         <div
-          className="absolute top-3 left-1/2 -translate-x-1/2 w-14 h-1.5 bg-gray-400 rounded-full cursor-grab active:cursor-grabbing z-20"
+          className="absolute top-2 left-1/2 -translate-x-1/2 w-20 h-2 bg-gray-400 rounded-full cursor-grab active:cursor-grabbing z-20"
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
@@ -118,25 +110,22 @@ export default function CategoryPanel({ open, setOpen }) {
           <h2 className={`text-2xl font-bold text-gray-900 absolute transition-all duration-300 ${open ? "right-6" : "left-1/2 -translate-x-1/2"}`}>
             منو رستوران
           </h2>
-
           {open && (
-            <button
-              onClick={() => setOpen(false)}
-              className="absolute left-6 p-3 rounded-xl hover:bg-gray-100 transition"
-            >
-              ←
+            <button onClick={() => setOpen(false)} className="absolute left-6 p-3 rounded-xl hover:bg-gray-100">
+              <MoveLeft className="w-7 h-7" />
             </button>
           )}
         </div>
 
-        {/* Content */}
         {open && (
           <div className="mt-6 px-6 pb-32 overflow-y-auto h-full">
             <CategoryCard />
           </div>
         )}
 
-    
+        {!open && (
+          <p className="text-center text-gray-500 text-sm mt-3 select-none">بکشید بالا</p>
+        )}
       </div>
     </>
   );
