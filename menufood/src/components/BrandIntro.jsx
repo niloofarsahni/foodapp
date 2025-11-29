@@ -40,7 +40,7 @@ export default function BrandIntro({ open }) {
             {/* SWIPE UP TEXT */}
             {!open && (
                 <p className="absolute left-0 right-0 flex justify-center 
-                bottom-[16vh] text-gray-200 animate-bounce pointer-events-none z-10">
+                bottom-[13vh] text-gray-200 animate-bounce pointer-events-none z-10">
                     بکشید بالا
                 </p>
             )}
