@@ -37,13 +37,7 @@ export default function BrandIntro({ open }) {
                 </motion.p>
             </div>
 
-            {/* SWIPE UP TEXT */}
-            {!open && (
-                <p className="absolute left-0 right-0 flex justify-center 
-                bottom-[13vh] text-gray-200 animate-bounce pointer-events-none z-10">
-                    بکشید بالا
-                </p>
-            )}
+          
         </div>
     );
 }
