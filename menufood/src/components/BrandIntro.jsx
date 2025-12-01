@@ -4,40 +4,44 @@ export default function BrandIntro({ open }) {
     return (
         <div
             className={`relative transition-all duration-300 
-           bg-cover bg-[15%_40%]    bg-no-repeat 
-            ${open ? "h-auto" : "h-[90%]"}`
-            }
-            style={{ backgroundImage: "url('/bg-food.jpg')" }}
+  bg-no-repeat  bg-cover bg-center
+            ${open ? "h-auto pb-10" : "h-[90%]"}`}
+            style={{ backgroundImage: "url('/mainpicfood24.jpg')" }}
         >
-            {/* Overlay for better text readability */}
-            <div className="absolute inset-0 bg-black/50"></div>
+            {/* Soft readable overlay (no position change) */}
+            <div className="absolute inset-0 bg-black/55"></div>
 
-            {/* CONTENT */}
-            {/* <div className="relative z-10 pt-10 text-center text-white">
-                <h1 className="text-4xl font-bold mt-5"> بهارک</h1>
-                <p className="mt-6 font-medium text-xl">رستورانی با الهام از طراوت طبیعت و تم سبز، جایی برای تجربه طعم‌های تازه و سالم.</p>
-            </div> */}
-            <div className="relative z-10 pt-10 text-center text-white">
+            {/* Subtle green atmosphere glow */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 "></div>
+
+            <div className="relative z-10 pt-20 px-6 text-center text-white">
                 <motion.h1
-                    className="text-4xl font-bold mt-5"
-                    initial={{ opacity: 0, y: 20, scale: 0.98 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    transition={{ duration: 1.2, ease: "easeInOut" }}
+                    className="text-5xl font-extrabold tracking-tight drop-shadow-md "
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1 }}
                 >
                     بهارک
                 </motion.h1>
 
                 <motion.p
-                    className="mt-6 font-medium text-xl"
+                    className="mt-8 font-light text-lg leading-relaxed max-w-xl mx-auto text-gray-200"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6, duration: 1.2, ease: "easeInOut" }}
+                    transition={{ delay: 0.5, duration: 1 }}
                 >
-                    رستورانی با الهام از طراوت طبیعت و تم سبز، جایی برای تجربه طعم‌های تازه و سالم.
+                جایی برای تجربه طعم‌های تازه و سالم.
                 </motion.p>
-            </div>
 
-          
+                {/* Elegant divider */}
+                <motion.div
+                    className="mt-8 w-28 h-[3px] mx-auto bg-gradient-to-r from-gray-400 via-gray-200 to-gray-400 rounded-full shadow-lg"
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ delay: 1, duration: 0.8, ease: "easeInOut" }}
+                />
+
+            </div>
         </div>
     );
 }

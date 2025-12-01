@@ -19,7 +19,7 @@ export default function BasketPage() {
                 </h1>
                 <button
                     onClick={() => navigate("/")}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg"
+                    className="px-4 py-2 bg-green-600 text-white rounded-lg"
                 >
                     بازگشت به صفحه اصلی
                 </button>
@@ -47,10 +47,9 @@ export default function BasketPage() {
                             navigate("/"); // fallback home
                         }
                     }}
-                    className="flex items-center gap-1 px-4 py-2 border rounded-lg text-gray-600 hover:bg-gray-100 transition"
+                    className="flex items-center gap-1 px-6 py-2 border rounded-lg text-gray-600 hover:bg-gray-100 transition"
                 >
-                    <MoveLeft className="w-6 h-6" />
-                    <span>بازگشت</span>
+                    <MoveLeft className="w-8 h-6" />
                 </button>
             </div>
 
@@ -83,22 +82,23 @@ export default function BasketPage() {
             </div>
 
             {/* ---------------- TOTAL PRICE ---------------- */}
-            <h2 className="text-2xl font-bold mt-6">
+            <h2 className="text-xl font-bold mt-6">
                 جمع کل: {totalPrice.toLocaleString()} تومان
             </h2>
 
             {/* ---------------- ACTIONS ---------------- */}
-            <div className="flex gap-4 mt-4">
+           
+            <div className="flex justify-center gap-6 mt-4 mb-5 fixed bottom-0 left-0 right-0 ">
                 <button
                     onClick={clearBasket}
-                    className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700"
+                    className="px-8 py-4 bg-gray-500 text-white text-lg font-medium rounded-lg hover:bg-gray-700"
                 >
                     پاک کردن سبد
                 </button>
 
                 <button
                     onClick={() => alert("سفارش شما ثبت شد!")}
-                    className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+                    className="px-8 py-4 bg-green-600 text-white text-lg font-medium rounded-lg hover:bg-green-700"
                 >
                     ثبت سفارش
                 </button>
