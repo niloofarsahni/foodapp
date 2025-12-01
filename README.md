@@ -1,6 +1,6 @@
 # 🍔 Food App (Mobile)
 
-A **mobile-first React food app** with a clean and interactive UI. The app features a **brand intro section** with smooth animations and a **collapsible category panel** that shows **“دسته بندی”** when idle. Designed specifically for **mobile devices**, it’s lightweight, responsive, and easy to use.
+A **mobile-first React food app** with a clean and interactive UI. The app features a **brand intro section** with smooth animations and a **collapsible category panel** that displays **“دسته بندی”** when the panel is closed. Designed specifically for **mobile devices**, it’s lightweight, responsive, and easy to use.
 
 ---
 
@@ -9,7 +9,7 @@ A **mobile-first React food app** with a clean and interactive UI. The app featu
 - Mobile-first design  
 - Brand Intro Section with background image & animations  
 - Collapsible Category Panel with button toggle  
-- Shows **“دسته بندی”** when idle  
+- Displays **“دسته بندی”** when the panel is closed  
 - Smooth animations & transitions  
 
 ---
@@ -17,7 +17,7 @@ A **mobile-first React food app** with a clean and interactive UI. The app featu
 ## 🌐 Live Demo
 
 Check the app online:  
-[**View Live Demo**](https://foodapp-teal-tau.vercel.app/)  
+[**View Live Demo**](https://foodapp-teal-tau.vercel.app)  
 
 ---
 
