@@ -12,7 +12,7 @@ export default function BrandIntro({ open }) {
             <div className="absolute inset-0 bg-black/55"></div>
 
             {/* Subtle green atmosphere glow */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 "></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 "></div>
 
             <div className="relative z-10 pt-20 px-6 text-center text-white">
                 <motion.h1
