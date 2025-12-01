@@ -4,14 +4,13 @@ import CategoryCard from "./CategoryCard";
 import { MoveLeft, ChevronUp } from "lucide-react";
 
 
-const CLOSED_PERCENT = 18;
+const CLOSED_PERCENT = 15;
 const OPEN_PERCENT = 90;
 
 export default function CategoryPanel() {
     const [isOpen, setIsOpen] = useState(false);
     const panelRef = useRef(null);
 
-    // Optional: Add swipe-to-close later (very smooth with this setup)
 
     return (
         <>
