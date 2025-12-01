@@ -50,7 +50,7 @@ export default function CategoryPanel() {
 
                         {/* Chevron Icon - rotates smoothly */}
                         <ChevronUp
-                            className={`w-7 h-7 text-gray-600 transition-transform duration-500 animate-bounce ${isOpen ? "rotate-180" : ""
+                            className={`w-7 h-7 text-gray-600 transition-transform duration-800 animate-bounce ${isOpen ? "rotate-180" : ""
                                 }`}
                         />
                         {!isOpen && <h1 className="text-xl font-semibold">مشاهده منو</h1>}

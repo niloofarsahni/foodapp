@@ -12,11 +12,11 @@ const CategoryItem = memo(({ label, image, link }) => {
       <img
         src={image}
         alt={label}
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover "
         loading="lazy" // Lazy load image
         onError={(e) => { e.currentTarget.style.display = 'none'; }}
       />
-      <div className="absolute inset-0 bg-black/40" />
+      <div className="absolute inset-0 bg-black/60 " />
       <div className="relative z-10 flex items-center w-full">
         <span className="flex-1 text-white text-center text-2xl">{label}</span>
       </div>
