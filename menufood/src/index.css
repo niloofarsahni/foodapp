@@ -114,6 +114,13 @@
   * {
     @apply border-border outline-ring/50;
   }
+  #root {
+    width: min(390px, 100%);
+    min-height: 100vh;
+    margin-inline: auto;
+    border: 1px solid oklch(0.922 0 0);
+    border-radius: 4px;
+  }
   body {
     @apply bg-background text-foreground;
     font-family: 'Inter', 'shabnam', sans-serif;

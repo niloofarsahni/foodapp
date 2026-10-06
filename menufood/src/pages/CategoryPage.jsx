@@ -24,6 +24,7 @@ export default function CategoryPage() {
 
     // Total items for basket badge
     const totalItems = basket.reduce((sum, item) => sum + item.quantity, 0);
+    const basketQuantities = new Map(basket.map(item => [item.id, item.quantity]));
 
 
     return (
@@ -66,8 +67,7 @@ export default function CategoryPage() {
             {/* Food Grid */}
             <div className="grid grid-cols-1 gap-6">
                 {filteredFoods.map((food) => {
-                    // Get current quantity from basket
-                    const quantity = basket.find(item => item.id === food.id)?.quantity || 0;
+                    const quantity = basketQuantities.get(food.id) || 0;
 
                     return (
                         <div
@@ -79,6 +79,8 @@ export default function CategoryPage() {
                                 src={food.image}
                                 alt={food.name}
                                 className="w-full h-38 object-cover"
+                                loading="lazy"
+                                decoding="async"
                             />
 
                             <div className="p-4 flex justify-between items-center">
