@@ -75,9 +75,9 @@ export default function FoodPage() {
       </div>
 
       {/* Food details */}
-      <div className="md:grid md:grid-cols-12 gap-6 bg-white shadow-sm">
+      <div className="gap-6 bg-white shadow-sm">
         {/* Left: Image */}
-        <div className="md:col-span-5 relative  ">
+        <div className="relative">
           <div className="relative overflow-hidden shadow-lg">
             <img
               src={food.image}
@@ -90,7 +90,7 @@ export default function FoodPage() {
 
           {/* Overlapping div */}
           <div className="absolute  w-full -translate-y-7 bg-white rounded-t-4xl  p-6 z-10">
-            <h1 className="text-2xl md:text-3xl font-extrabold">{food.name}</h1>
+            <h1 className="text-2xl font-extrabold">{food.name}</h1>
             <p className="text-gray-600 mt-4 leading-relaxed mb-6">
               {food.description}
             </p>

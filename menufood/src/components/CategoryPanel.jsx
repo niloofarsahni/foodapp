@@ -18,7 +18,7 @@ export default function CategoryPanel() {
             {isOpen && (
                 <div
                     onClick={() => setIsOpen(false)}
-                    className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity duration-300"
+                    className="absolute inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity duration-300"
                 />
             )}
 
@@ -26,7 +26,7 @@ export default function CategoryPanel() {
             <div
                 ref={panelRef}
                 className={`
-          fixed inset-x-0 bottom-0 z-50 
+          absolute inset-x-0 bottom-0 z-50 
           bg-white rounded-t-3xl shadow-2xl
           transition-all duration-500 ease-out
           ${isOpen ? 'translate-y-0' : `translate-y-[${100 - CLOSED_PERCENT}vh]`}
@@ -82,7 +82,7 @@ export default function CategoryPanel() {
                 </div>
             </div>
 
-         
+
         </>
     );
 }
